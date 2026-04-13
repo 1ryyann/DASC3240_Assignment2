@@ -21,7 +21,7 @@ execute:
 Students may use generative AI tools during assignment, for example, to check and improve code, provided that the content is original and reflects the student's own contributions. If generative AI is used, students must declare its use in the box below. An example statement is: “*During the assignment, I used \[XXXX\] to \[XXXX\]. I subsequently reviewed and edited the code and take(s) full responsibility for the final version of the code.”*
 
 ::: callout
-xxxxxxxxxxxxxx
+During the assignment, I used Grok AI to help modify code and provide structure suggestions for the Quarto document. I reviewed, tested, and edited all code and text myself and take full responsibility for the final version.
 :::
 
 # Dataset
