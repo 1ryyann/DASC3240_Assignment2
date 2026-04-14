@@ -1,6 +1,6 @@
 ---
-title: "Assignment II: Group [Number]"
-author: "Name"
+title: "Assignment II: GroupD "
+author: "Chan Tsz Ting"
 format: 
   html:
     toc: true
@@ -14,7 +14,7 @@ execute:
 
 # Name
 
-[**Name**]{style="color:red"}**: XXXXXX**
+[**Name**]{style="color:red"}**: Chan Tsz Ting**
 
 # Generative AI declaration
 
@@ -52,6 +52,7 @@ BIOTIME (CC0) <https://biotime.st-andrews.ac.uk/usageGuidelines.php>
 
 ::: callout
 ### Your answer is here
+datasets::quakes
 
 xxxxxxxxxxxxxx
 :::
@@ -64,6 +65,8 @@ xxxxxxxxxxxxxx
 
 ::: callout
 ### Your answer is here
+The dataset contains 1,000 seismic events (earthquakes) occurring near Fiji since 1964. It includes the following variables.lat or long which is the geographic coordinates of the event.
+Depth which is the depth of the earthquake in kilometers (km).Mag which is the Richter magnitude of the earthquake.And finally the stations which is the number of stations that reported the event.
 
 xxxxxxxxxxxxxx
 :::
@@ -76,6 +79,7 @@ xxxxxxxxxxxxxx
 
 ::: callout
 ### Your answer is here
+I choose a 3D Scatter Plot using lat, long, and depth because earthquakes happen in 3D space. A static plot makes it hard to see the relationship between location and depth, but an interactive 3D plot allows the user to rotate the view to see the subduction zone.The strengths of it is allows for precise exploration of data points through hovering and rotation. While the weaknesses is 3D plots can sometimes be difficult to interpret on a 2D screen without active user interaction.
 
 xxxxxxxxxxxxxx
 :::
@@ -88,6 +92,9 @@ Note: At least one plot is required, but multiple plots are allowed
 
 ::: callout
 ### Your answer is here
+There are few purposes. First, Accurate Spatial Representation.Physical Context like Earthquakes occur at various depths, and a 3D plot allows us to map depth to the Z-axis, representing the actual underground location.and Structural Clarity helps the reader visualize the "story" of the data, such as the angle of a subduction zone where one tectonic plate slides beneath another.
+
+Second, Multi-Variable Integration.We can display four variables simultaneously—longitude, latitude, depth, and magnitude—without making the chart look cluttered.And by using color or size for magnitude, the visualization has a focused "target," allowing the reader to immediately see if larger earthquakes happen at specific depths.
 
 xxxxxxxxxxxxxx
 :::
@@ -97,7 +104,20 @@ Note: If you want to specify setting for a code chunk, you can use `#|` for each
 ```{r}
 #| echo: true
 # YOUR CODE HERE
-# xxxxx
+library(plotly)
+
+# Create a 3D scatter plot of earthquake locations
+plot_ly(quakes, 
+        x = ~long, y = ~lat, z = ~-depth, # Negative depth to show it underground
+        color = ~mag, 
+        size = ~mag,
+        text = ~paste("Magnitude:", mag, "<br>Depth:", depth, "km"),
+        type = "scatter3d", 
+        mode = "markers") %>%
+  layout(title = "3D Mapping of Fiji Earthquakes",
+         scene = list(xaxis = list(title = 'Longitude'),
+                      yaxis = list(title = 'Latitude'),
+                      zaxis = list(title = 'Depth (km)')))
 ```
 
 ### Animation using `gganimate`
@@ -108,6 +128,7 @@ Note: If you want to specify setting for a code chunk, you can use `#|` for each
 
 ::: callout
 ### Your answer is here
+I choose A transitioning scatter plot (using transition_states or transition_filter) as by using transition_states to cycle through different depth levels,i can show how the relationship between magnitude and reporting stations changes as i go deeper into the Earth. Also, the quakes dataset has 1,000 points. Animating them in "chunks" (by depth or magnitude) prevents the screen from becoming a cluttered mess of overlapping dots, making it easier for the reader to follow.For strengths, it emphasizes the "story" that stronger earthquakes are detected by significantly more stations.But for weaknesses, animations can be distracting if the transitions are too fast or if there is too much data moving at once.
 
 xxxxxxxxxxxxxx
 :::
@@ -120,11 +141,26 @@ Note: At least one animation is required, but multiple animations are allowed
 
 ::: callout
 ### Your answer is here
+The purpose of this animation is to demonstrate that while larger magnitude earthquakes are generally detected by more stations, this relationship is also influenced by the depth of the seismic event.
 
 xxxxxxxxxxxxxx
 :::
 
 ```{r}
 # YOUR CODE HERE
-# xxxxx
+library(ggplot2)
+library(gganimate)
+
+# Plotting Magnitude vs Stations, animated by Depth categories
+ggplot(quakes, aes(x = mag, y = stations, color = mag)) +
+  geom_point(alpha = 0.7, size = 3) +
+  theme_minimal() +
+  labs(title = 'Magnitude vs Reporting Stations',
+       subtitle = 'Showing Depth: {closest_state} km',
+       x = 'Richter Magnitude',
+       y = 'Number of Stations') +
+  transition_states(cut(depth, breaks = 4), 
+                    transition_length = 2, 
+                    state_length = 1) +
+  ease_aes('linear')
 ```
