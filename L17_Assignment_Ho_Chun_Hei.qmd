@@ -1,5 +1,5 @@
 ---
-title: "Assignment II: Group [4]"
+title: "Assignment II: Group [D]"
 author: "Ho Chun Hei"
 format: 
   html:
@@ -80,7 +80,7 @@ This data came from the United States Census in the 2000. The Census is a big su
 ### Your answer is here
 scatter plot. Because it is a good way to show the relationship 2 variables
 
-The strengths are it is easy to see patterns with many data points. The hover tooltip is also a good feature that allows us to see the exact values. The legend is clickable that can double click on a category and compare it with the others. We can also single click to hide a category from plot. The zoom feature allows us to drag a box around a specific area and have a closer look. Trend lines can be added to summarize the overall direction of the data.
+One of the strength is it is easy to see patterns with many data points. The hover tooltip is also a good feature that allows us to see the exact values. The legend is clickable that can double click on a category and compare it with the others. We can also single click to hide a category from plot. The zoom feature allows us to drag a box around a specific area and have a closer look. Trend lines can be added to summarize the overall direction of the data.
 
 The weaknesses are when there are many data points, it can become quite crowded and dots may overlap each other. This makes it harder to click on a specific point. Trend lines can show a general pattern can't tell the how strong the correlation is. The plot only shows two variables on the axes at the same time, so other factors are not visible unless use the hover tooltip. Finally, it must be viewed on a computer for the full experience.
 
@@ -103,20 +103,20 @@ Note: If you want to specify setting for a code chunk, you can use `#|` for each
 ```{r}
 #| echo: true
 # YOUR CODE HERE
+# a scatter plot showing education vs poverty with hover tooltips and trend lines to show their relationships
 library(tidyverse)
 library(plotly)
 
 p <- ggplot(midwest, aes(x = percollege, y = percbelowpoverty, color = state)) +
   geom_point(alpha = 0.7, size = 2) +
-  geom_smooth(method = "lm", se = FALSE, linewidth = 1) + 
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1) + # Add trend line 
   labs(
-    title = "College Education vs Poverty in the Midwest",
+    title = "College Education vs Poverty in the Midwest", # Add title and axis
     x = "percentage with college degree",
     y = "percentage below entry"
   ) +
   theme_minimal()
 
-# Convert to plotly
 ggplotly(p)
 ```
 ```
@@ -130,8 +130,11 @@ ggplotly(p)
 
 ::: callout
 ### Your answer is here
+My animation switches between the five states. I chose this because my data does not have a time variable so instead of showing the change over time, I show how the pattern looks in different states.
 
-xxxxxxxxxxxxxx
+One of the strengths is it shows only one state at one time so its not confusing. The dots fade in and out making the animation looks a bit smoother. The state name also changes in the title with the animation
+
+The weaknesses of this animation are that it loops over and over again non stop. To see a specific state, we have to wait for it to come back. It also does not work on printed paper because it is animated.
 :::
 
 Note: At least one animation is required, but multiple animations are allowed
@@ -143,14 +146,14 @@ Note: At least one animation is required, but multiple animations are allowed
 ::: callout
 ### Your answer is here
 
-xxxxxxxxxxxxxx
+To show how the relationship between college education and poverty in the five states. Watching the states cycle can compare the patterns and see that some states have a stronger connection between education and poverty than others.
 :::
 
 ```{r}
+# animated scatter plot that repeats the 5 states to compare the education and poverty patterns
 library(ggplot2)
 library(gganimate)
 library(gifski)
-data("midwest")
 
 p_anim <- ggplot(midwest, aes(x = percollege, y = percbelowpoverty, 
                               size = poptotal/1000, color = state)) +
@@ -158,22 +161,20 @@ p_anim <- ggplot(midwest, aes(x = percollege, y = percbelowpoverty,
   scale_color_brewer(palette = "Set1", guide = "none") +
   scale_size_continuous(name = "Population (thousands)", range = c(2, 10)) +
   labs(
-    title = "State: {closest_state}",
+    title = "State: {closest_state}", # Add title and axis
     x = "percentage with college degree",
     y = "percentage below entry"
   ) +
   theme_minimal(base_size = 14) +
   theme(plot.title = element_text(face = "bold", size = 18))
 
-anim <- p_anim +
+anim <- p_anim + # Add animation to the plot
   transition_states(state, transition_length = 3, state_length = 2) +
   ease_aes('cubic-in-out') +
-  enter_fade() +
-  exit_fade() +
+  enter_fade() + # Makes dots fade in when appearing
+  exit_fade() + # Makes dots shrink when disappearing
   shadow_wake(wake_length = 0.2)
 
-animate(anim, nframes = 100, fps = 10, width = 700, height = 500)
+animate(anim, nframes = 100, fps = 10, width = 700, height = 500) # Make the animation as a GIF
 ```
-```
-```
-```
+
