@@ -142,7 +142,7 @@ Note: At least one animation is required, but multiple animations are allowed
 The purpose of the visualization is to animate mammls ordered by total sleep hours, illustrating the range of sleep durations across different species.
 :::
 
-```{r}
+{r}
 # YOUR CODE HERE
 #| echo: true
 library(gganimate)
