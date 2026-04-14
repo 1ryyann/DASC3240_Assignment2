@@ -14,12 +14,12 @@ execute:
 
 # Name
 
-[*Cheng Nok Ho]{style="color:red"}: 21062910*
+[*Cheng Nok Ho*]{style="color:red"}: *21062910*
 
 # Generative AI declaration
 
 ::: callout
-During the assignment, I used Deep Seek to help understand plotly and gganimate syntax. I subsequently reviewed and edited the code and take(s) full responsibility for the final version of the code.”
+During the assignment, I used Deep Seek to help understand plotly and gganimate syntax. I subsequently reviewed and edited the code and take full responsibility for the final version of the code.”
 :::
 
 
@@ -76,7 +76,7 @@ The dataset plays a crucial role in learning and practing a professional data sc
 
 ::: callout
 ### Your answer is here
-i chose an interactive scatterplot because it shows relationships between two continuous variables, body weight and total sleep hours.
+I chose an interactive scatterplot because it shows relationships between two continuous variables, body weight and total sleep hours.
 
 Strengths: easy to reveal correlation between two variables, preserves individual data point
 
