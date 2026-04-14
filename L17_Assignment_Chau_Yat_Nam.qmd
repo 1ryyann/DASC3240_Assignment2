@@ -1,5 +1,5 @@
 ---
-title: "Assignment II: Group D"
+title: "Assignment II: Group [D]"
 author: "Chau Yat Nam"
 format: 
   html:
@@ -107,11 +107,6 @@ Note: If you want to specify setting for a code chunk, you can use `#|` for each
 ```{r}
 #| echo: true
 
-# Install the package automatically if it's not already installed
-if (!requireNamespace("palmerpenguins", quietly = TRUE)) {
-  install.packages("palmerpenguins")
-}
-
 library(palmerpenguins)
 library(ggplot2)
 library(plotly)
@@ -165,10 +160,17 @@ The purpose is to show that **the positive relationship between body mass and fl
 :::
 
 ```{r}
-library(gganimate)
+#| echo: true
+#| fig-align: center
+#| out-width: "100%"
+#| cache: true     # makes future renders much faster
 
-anim <- ggplot(penguins_clean, aes(x = flipper_length_mm, 
-                                   y = body_mass_g, 
+library(gganimate)
+library(gifski)   
+
+# Create the animation 
+anim <- ggplot(penguins_clean, aes(x = flipper_length_mm,
+                                   y = body_mass_g,
                                    color = species)) +
   geom_point(size = 2, alpha = 0.7) +
   labs(title = "Penguin Size Over Time: Year {frame_time}",
@@ -178,5 +180,14 @@ anim <- ggplot(penguins_clean, aes(x = flipper_length_mm,
   transition_time(year) +
   ease_aes("linear")
 
-animate(anim, nframes = 100, fps = 10, width = 800, height = 500)
+# Save the animation as a GIF
+animate(anim, 
+        nframes = 100, 
+        fps = 10, 
+        width = 800, 
+        height = 500,
+        renderer = gifski_renderer("penguin_animation.gif"))
+
+# Display the GIF in the rendered HTML page
+knitr::include_graphics("penguin_animation.gif")
 ```
