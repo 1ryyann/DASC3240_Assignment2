@@ -154,7 +154,6 @@ To show how the relationship between college education and poverty in the five s
 library(ggplot2)
 library(gganimate)
 library(gifski)
-data("midwest")
 
 p_anim <- ggplot(midwest, aes(x = percollege, y = percbelowpoverty, 
                               size = poptotal/1000, color = state)) +
