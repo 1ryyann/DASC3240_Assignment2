@@ -14,12 +14,12 @@ execute:
 
 # Name
 
-[*Cheng Nok Ho*]{style="color:red"}: *21062910*
+[**Name**]{style="color:red"}**: Cheng Nok Ho **
 
 # Generative AI declaration
 
 ::: callout
-During the assignment, I used Deep Seek to help understand plotly and gganimate syntax. I subsequently reviewed and edited the code and take full responsibility for the final version of the code.”
+During the assignment, I used Deep Seek to provide suggestions on my drafting codes. I subsequently reviewed and edited the code and take full responsibility for the final version of the code.”
 :::
 
 
@@ -51,7 +51,7 @@ BIOTIME (CC0) <https://biotime.st-andrews.ac.uk/usageGuidelines.php>
 
 ::: callout
 ### Your answer is here
-ggplot2::msleep
+I used the dataset `ggplot2::msleep`. 
 :::
 
 ### Introduction
@@ -62,7 +62,7 @@ ggplot2::msleep
 
 ::: callout
 ### Your answer is here
-The 'ggplot2::msleep' dataset contains sleep and weight information for 83 different mammals. There are 11 variables for each animal, including: 
+The `ggplot2::msleep` dataset contains sleep and weight information for 83 different mammals. There are 11 variables for each animal, including: 
 name (species), genus, vore (diet type), order (biological order), conservation (conservation status), sleep_total (total sleep hours per day), sleep_rem (REM sleep hours), sleep_cycle, awake (hours awake), brainwt (brain weight in kg), and bodywt (body weight in kg).
 
 The dataset plays a crucial role in learning and practing a professional data science workflow. It was obtained through direct observation using electroencephalography (EEG) and behavioural monitoring.
@@ -159,3 +159,4 @@ p_anim <- ggplot(msleep, aes(x = bodywt, y = sleep_total, color = order)) +
   theme_minimal()
 
 animate(p_anim, nframes = 100, fps = 8, width = 800, height = 500)
+```
